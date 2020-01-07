@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace GameSparks.Platforms.Native
 {
-#if ((UNITY_SWITCH || UNITY_XBOXONE || (WINDOWS_UWP && ENABLE_IL2CPP)) && !UNITY_EDITOR) || GS_FORCE_NATIVE_PLATFORM
+#if ((UNITY_SWITCH || UNITY_XBOXONE) && !UNITY_EDITOR) || GS_FORCE_NATIVE_PLATFORM
     /// <summary>
     /// Platform specific implementation used for the iOS Platform.
     /// </summary>
@@ -55,6 +55,14 @@ namespace GameSparks.Platforms.Native
             socket.Initialize(url, messageReceived, closed, opened, error);
             socket.SetController(webSocketController);
             socket.Open();
+            return socket;
+        }
+
+        public override IGameSparksWebSocket GetBinarySocket(string url, Action<byte[]> binaryMessageReceived, Action closed, Action opened, Action<string> error)
+        {
+            var socket = new NativeWebSocket();
+            socket.Initialize(url, binaryMessageReceived, closed, opened, error);
+            socket.SetController(webSocketController);
             return socket;
         }
 
