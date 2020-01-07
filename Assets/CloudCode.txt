@@ -1,7 +1,7 @@
 
 CLOUD CODE FOR INSERTING ENTRY: 
 
-    var geoMessageList = Spark.runtimeCollection("GeoMessage"); 
+    var geoMessageList = Spark.metaCollection("GeoMessage"); 
     var messageLat = Spark.getData().LAT;
     var messageLon = Spark.getData().LON; 
     var messageText = Spark.getData().TEXT; 
@@ -14,12 +14,12 @@ CLOUD CODE FOR INSERTING ENTRY:
 
 CLOUD CODE FOR DROPPING: 
 
-var messageData = Spark.runtimeCollection("GeoMessage");
+var messageData = Spark.metaCollection("GeoMessage");
 messageData.remove({});
 
 CLOUD CODE FOR READING ALL MESSAGES: 
 
-var messageData = Spark.runtimeCollection("GeoMessage");
+var messageData = Spark.metaCollection("GeoMessage");
 var cursor = messageData.find();
 var allMessages = [];
 
