@@ -18,7 +18,7 @@ public class Message : MonoBehaviour {
 		//mesage bubble according to the length of text.
 		//right now this only replaces spaces with a new 
 		//line character
-		string newText = text.Replace (" ", "\n");
+		string newText = text.Replace ("-", "\n");
 		messageText.text = newText;
 	}
 

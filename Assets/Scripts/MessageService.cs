@@ -43,6 +43,7 @@
 				if (!response.HasErrors) {
 					Debug.Log("Received Player Data From GameSparks...");
 					List<GSData> locations = response.ScriptData.GetGSDataList ("all_Messages");
+
 					for (var e = locations.GetEnumerator (); e.MoveNext ();) {
 						
 						GameObject MessageBubble = Instantiate (messagePrefabAR,mapRootTransform);
@@ -50,8 +51,17 @@
 
 						message.latitude = double.Parse(e.Current.GetString ("messLat"));
 						message.longitude = double.Parse(e.Current.GetString ("messLon"));
-						message.text = e.Current.GetString ("messText");
-						messageObjectList.Add(MessageBubble);
+                        message.text = e.Current.GetString("messText");
+
+                        List<string> ofertas = e.Current.GetStringList("ofertas");
+
+                        if (ofertas != null)
+                        {
+                            message.text = message.text
+                            + "-" + ofertas.Count.ToString() + " ofertas";
+                        }
+
+                        messageObjectList.Add(MessageBubble);
 					}
 				} else {
 					Debug.Log("Error Loading Message Data...");
